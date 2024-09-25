@@ -4,7 +4,7 @@
     <assignments>
         <name>AddToCollection</name>
         <label>AddToCollection</label>
-        <locationX>138</locationX>
+        <locationX>270</locationX>
         <locationY>458</locationY>
         <assignmentItems>
             <assignToReference>OrderProductIds</assignToReference>
@@ -14,14 +14,14 @@
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Iterator</targetReference>
+            <targetReference>Copy_1_of_Eval</targetReference>
         </connector>
     </assignments>
     <assignments>
-        <name>Mark_To_True</name>
-        <label>Mark To True</label>
+        <name>Copy_2_of_Mark_To_True</name>
+        <label>Mark To BackOrder</label>
         <locationX>138</locationX>
-        <locationY>974</locationY>
+        <locationY>674</locationY>
         <assignmentItems>
             <assignToReference>HasBackOrder</assignToReference>
             <operator>Assign</operator>
@@ -30,15 +30,39 @@
             </value>
         </assignmentItems>
         <connector>
-            <isGoTo>true</isGoTo>
-            <targetReference>Order_Health</targetReference>
+            <targetReference>Iterator</targetReference>
         </connector>
     </assignments>
+    <decisions>
+        <name>Copy_1_of_Eval</name>
+        <label>Copy 1 of Eval</label>
+        <locationX>270</locationX>
+        <locationY>566</locationY>
+        <defaultConnector>
+            <targetReference>Iterator</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Copy_1_of_Yes_It_Has_BackOrder</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Iterator.Availability__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Backorder</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Copy_2_of_Mark_To_True</targetReference>
+            </connector>
+            <label>Yes It Has BackOrder</label>
+        </rules>
+    </decisions>
     <decisions>
         <name>Eval</name>
         <label>Eval</label>
         <locationX>270</locationX>
-        <locationY>866</locationY>
+        <locationY>1166</locationY>
         <defaultConnector>
             <targetReference>Has_BackOrders</targetReference>
         </defaultConnector>
@@ -54,7 +78,8 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Mark_To_True</targetReference>
+                <isGoTo>true</isGoTo>
+                <targetReference>Order_Health</targetReference>
             </connector>
             <label>Yes It Has BackOrder</label>
         </rules>
@@ -95,7 +120,7 @@
         <name>Has_BackOrders</name>
         <label>Has BackOrders</label>
         <locationX>50</locationX>
-        <locationY>758</locationY>
+        <locationY>1058</locationY>
         <collectionReference>Get_All_Products_In_Order</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
@@ -142,7 +167,7 @@
         <name>Get_All_Products_In_Order</name>
         <label>Get All Products In Order</label>
         <locationX>50</locationX>
-        <locationY>650</locationY>
+        <locationY>950</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Has_BackOrders</targetReference>
@@ -185,6 +210,7 @@
         <getFirstRecordOnly>false</getFirstRecordOnly>
         <object>OrderItem</object>
         <queriedFields>Id</queriedFields>
+        <queriedFields>Availability__c</queriedFields>
         <queriedFields>Product2Id</queriedFields>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
@@ -192,7 +218,7 @@
         <name>Order_Health</name>
         <label>Order Health</label>
         <locationX>50</locationX>
-        <locationY>1316</locationY>
+        <locationY>1508</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
