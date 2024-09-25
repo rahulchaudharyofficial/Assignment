@@ -1,0 +1,23 @@
+<template>
+  <lightning-progress-indicator current-step="New" type="path">
+    <template for:each={steps} for:item="step">
+      <lightning-progress-step
+        label={step.label}
+        value={step.value}
+        key={step.label}
+      ></lightning-progress-step>
+    </template>
+  </lightning-progress-indicator>
+  <lightning-button label="Next Stage" onclick={nextStep}></lightning-button>
+  <!-- <div class="slds-box">
+        <lightning-card title="WireGetRatingPicklist" icon-name="custom:custom67">
+            <ul class="slds-var-m-around_medium">
+                <template for:each={steps} for:item="rating" for:index="index">
+                    <li key={rating.index}>
+                        {rating.label}
+                    </li>
+                </template>
+            </ul>
+        </lightning-card>
+    </div> -->
+</template>

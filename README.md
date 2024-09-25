@@ -1,18 +1,46 @@
-# Salesforce DX Project: Next Steps
+# Project Overview
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+John is an operations manager. He wants to ensure product availability information is populated on
+an order by the service rep before the service rep can progress the order from the New stage to the
+Fulfillment stage. John wants to capture the warehouse manager’s name who confirmed available
+inventory and whether each of the products ordered is in inventory or backordered. Later, when John
+views the Order, he wants to see backordered scenarios indicated with red highlights on the order
+screen.
 
-## How Do You Plan to Deploy Your Changes?
+## Key Deliverable
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+- Operation Manager should be able to
 
-## Configure Your Salesforce DX Project
+  - See warehouse manager's details who confirmed inventory
+  - See if product is available in inventory or backordered
+  - See at order record screen with red highlight if order is back ordered
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+- Warehouse Manager should be able to
 
-## Read All About It
+  - Specify product inventory detail (Available / Back order)
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+- Sales Rep should be able to
+  - See on order screen if product is inventory or back order
+  - should be able to change order stage
+
+## Assumptions
+
+    -   Warehouse manager provide inventory specific input at each product level
+
+    -   Assuming that an order may have more than one product in it
+
+    -   There is a process in place to receive / populate inventory details in system along with warehouse manager details (reference)
+
+    -   Assuming if order is in inventory sales rep should be able to move it to fullfilment stage else not (if backorder)
+
+    -   Assuming order is available in new stage for Sales Rep to review and decide if move it for next stage or not
+
+    -   Assuming that on each order screen itself it is expected to understand order health
+
+## High Level Workflow
+
+![Workflow](docs/images/flow.png)
+
+### Demo
+
+![Snapshot](docs/images/demo.png)
