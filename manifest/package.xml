@@ -32,5 +32,15 @@
         <members>*</members>
         <name>StaticResource</name>
     </types>
+    <types>
+        <members>*</members>
+        <name>Flow</name>
+    </types>
+    <types>
+        <members>Order</members>
+        <members>OrderItem</members>
+        <members>Product2</members>
+        <name>CustomObject</name>
+    </types>
     <version>61.0</version>
 </Package>
